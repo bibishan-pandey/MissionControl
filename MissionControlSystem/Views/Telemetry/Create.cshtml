@@ -1,0 +1,68 @@
+@model MissionControlSystem.Models.Telemetry
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Telemetry</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Timestamp" class="control-label"></label>
+                <input asp-for="Timestamp" class="form-control" />
+                <span asp-validation-for="Timestamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpacecraftId" class="control-label"></label>
+                <select asp-for="SpacecraftId" class ="form-control" asp-items="ViewBag.SpacecraftId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SatelliteId" class="control-label"></label>
+                <select asp-for="SatelliteId" class ="form-control" asp-items="ViewBag.SatelliteId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MissionId" class="control-label"></label>
+                <select asp-for="MissionId" class ="form-control" asp-items="ViewBag.MissionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelemetryDataType" class="control-label"></label>
+                @* <select asp-for="TelemetryDataType" class="form-control"></select> *@
+                @(Html.DropDownListFor(model => model.TelemetryDataType,
+                    new SelectList(Enum.GetValues(typeof(TelemetryDataType)).Cast<TelemetryDataType>().Select(e => new SelectListItem
+                    {
+                        Value = e.ToString(),
+                        Text = e.ToString()
+                    }), "Value", "Text"),
+                    new { @class = "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" }))
+                <span asp-validation-for="TelemetryDataType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unit" class="control-label"></label>
+                <input asp-for="Unit" class="form-control" />
+                <span asp-validation-for="Unit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

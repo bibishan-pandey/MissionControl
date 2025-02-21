@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MissionControlSystem.Data;
 
@@ -10,9 +11,11 @@ using MissionControlSystem.Data;
 namespace MissionControlSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250221154342_SpacecraftModel")]
+    partial class SpacecraftModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.13");
@@ -213,37 +216,6 @@ namespace MissionControlSystem.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MissionControlSystem.Models.AsteroidModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Composition")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("DiameterKm")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("DistanceFromEarthAu")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("MissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MissionId");
-
-                    b.ToTable("AsteroidModel");
-                });
-
             modelBuilder.Entity("MissionControlSystem.Models.ControlSystem", b =>
                 {
                     b.Property<int>("Id")
@@ -310,77 +282,6 @@ namespace MissionControlSystem.Data.Migrations
                     b.ToTable("Mission");
                 });
 
-            modelBuilder.Entity("MissionControlSystem.Models.Personnel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ControlSystemId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("MissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PersonnelRole")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ControlSystemId");
-
-                    b.HasIndex("MissionId");
-
-                    b.ToTable("Personnel");
-                });
-
-            modelBuilder.Entity("MissionControlSystem.Models.Satellite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("LaunchDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Operator")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("OrbitType")
-                        .HasMaxLength(20)
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("SpacecraftId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Status")
-                        .HasMaxLength(20)
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SpacecraftId");
-
-                    b.ToTable("Satellite");
-                });
-
             modelBuilder.Entity("MissionControlSystem.Models.Spacecraft", b =>
                 {
                     b.Property<int>("Id")
@@ -413,47 +314,6 @@ namespace MissionControlSystem.Data.Migrations
                     b.HasIndex("MissionId");
 
                     b.ToTable("Spacecraft");
-                });
-
-            modelBuilder.Entity("MissionControlSystem.Models.Telemetry", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("SatelliteId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("SpacecraftId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TelemetryDataType")
-                        .HasMaxLength(50)
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MissionId");
-
-                    b.HasIndex("SatelliteId");
-
-                    b.HasIndex("SpacecraftId");
-
-                    b.ToTable("Telemetry");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -507,15 +367,6 @@ namespace MissionControlSystem.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MissionControlSystem.Models.AsteroidModel", b =>
-                {
-                    b.HasOne("MissionControlSystem.Models.Mission", "Mission")
-                        .WithMany()
-                        .HasForeignKey("MissionId");
-
-                    b.Navigation("Mission");
-                });
-
             modelBuilder.Entity("MissionControlSystem.Models.Mission", b =>
                 {
                     b.HasOne("MissionControlSystem.Models.ControlSystem", "ControlSystem")
@@ -527,32 +378,6 @@ namespace MissionControlSystem.Data.Migrations
                     b.Navigation("ControlSystem");
                 });
 
-            modelBuilder.Entity("MissionControlSystem.Models.Personnel", b =>
-                {
-                    b.HasOne("MissionControlSystem.Models.ControlSystem", "ControlSystem")
-                        .WithMany()
-                        .HasForeignKey("ControlSystemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MissionControlSystem.Models.Mission", "Mission")
-                        .WithMany()
-                        .HasForeignKey("MissionId");
-
-                    b.Navigation("ControlSystem");
-
-                    b.Navigation("Mission");
-                });
-
-            modelBuilder.Entity("MissionControlSystem.Models.Satellite", b =>
-                {
-                    b.HasOne("MissionControlSystem.Models.Spacecraft", "Spacecraft")
-                        .WithMany()
-                        .HasForeignKey("SpacecraftId");
-
-                    b.Navigation("Spacecraft");
-                });
-
             modelBuilder.Entity("MissionControlSystem.Models.Spacecraft", b =>
                 {
                     b.HasOne("MissionControlSystem.Models.Mission", "Mission")
@@ -560,31 +385,6 @@ namespace MissionControlSystem.Data.Migrations
                         .HasForeignKey("MissionId");
 
                     b.Navigation("Mission");
-                });
-
-            modelBuilder.Entity("MissionControlSystem.Models.Telemetry", b =>
-                {
-                    b.HasOne("MissionControlSystem.Models.Mission", "Mission")
-                        .WithMany()
-                        .HasForeignKey("MissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MissionControlSystem.Models.Satellite", "Satellite")
-                        .WithMany()
-                        .HasForeignKey("SatelliteId");
-
-                    b.HasOne("MissionControlSystem.Models.Spacecraft", "Spacecraft")
-                        .WithMany()
-                        .HasForeignKey("SpacecraftId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Mission");
-
-                    b.Navigation("Satellite");
-
-                    b.Navigation("Spacecraft");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - Mission Control</title>
 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
@@ -19,7 +20,7 @@
 <header class="bg-white shadow-md">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
         <div class="flex items-center space-x-2">
-            <img src="./assets/brand.png" alt="Nova Dynamics Logo" class="h-10">
+            <img src="~/assets/brand.png" alt="Nova Dynamics Logo" class="h-10">
         </div>
         <nav class="space-x-6 flex items-center">
             <a asp-area="" asp-controller="Home" asp-action="Index" class="text-gray-700 hover:text-blue-500">Home</a>
@@ -35,7 +36,7 @@
     </div>
 </header>
 
-<main role="main" class="pb-3">
+<main role="main" class="py-8 container mx-auto px-4">
     @RenderBody()
 </main>
 
@@ -58,6 +59,7 @@
 </footer>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -34,6 +34,17 @@ public class Program
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
+        
+        using var scope = app.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        try
+        {
+            DbInitializer.Seed(services);
+        }
+        catch (Exception ex)
+        {
+            // Log the error or handle it as needed
+        }
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();

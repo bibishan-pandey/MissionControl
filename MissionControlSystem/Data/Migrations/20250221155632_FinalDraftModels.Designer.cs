@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MissionControlSystem.Data;
 
@@ -10,9 +11,11 @@ using MissionControlSystem.Data;
 namespace MissionControlSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250221155632_FinalDraftModels")]
+    partial class FinalDraftModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.13");
@@ -333,6 +336,7 @@ namespace MissionControlSystem.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("PersonnelRole")
+                        .HasMaxLength(20)
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
