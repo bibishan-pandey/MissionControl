@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Mission Control</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"/>
+    <link rel="stylesheet" href="~/css/style.css"/>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans antialiased">
+<!-- Navbar -->
+<header class="bg-white shadow-md">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+            <img src="./assets/brand.png" alt="Nova Dynamics Logo" class="h-10">
+        </div>
+        <nav class="space-x-6 flex items-center">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="text-gray-700 hover:text-blue-500">Home</a>
+            <a href="#why-us" class="text-gray-700 hover:text-blue-500">Why us?</a>
+            <a href="#about-us" class="text-gray-700 hover:text-blue-500">About Us</a>
+            <a href="#blogs" class="text-gray-700 hover:text-blue-500">Blogs</a>
+            <a href="#faqs" class="text-gray-700 hover:text-blue-500">FAQs</a>
+            <button class="bg-blue-500 text-white px-10 py-2 hover:bg-blue-600">
+                Mission Control
+            </button>
+            @* <partial name="_LoginPartial"/> *@
+        </nav>
+    </div>
+</header>
+
+<main role="main" class="pb-3">
+    @RenderBody()
+</main>
+
+<!-- Footer -->
+<footer class="bg-white py-8">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <img src="~/assets/logo.png" alt="Nova Dynamics Logo" class="h-16">
+        <div class="space-x-4">
+            <a href="#about-us" class="text-gray-600 hover:text-gray-900">About Us</a>
+            <a href="#blogs" class="text-gray-600 hover:text-gray-900">Blogs</a>
+            <a href="#faqs" class="text-gray-600 hover:text-gray-900">FAQs</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900">Careers</a>
+        </div>
+        <div class="flex space-x-4">
+            <a href="#" class="text-gray-600 hover:text-gray-900">Facebook</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900">Twitter</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
